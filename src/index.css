@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 8%; /* Dark background */
+    --foreground: 55 20% 95%; /* Light text, slightly off-white for readability */
+    
+    --card: 0 0% 12%; /* Slightly lighter dark for cards */
+    --card-foreground: 55 20% 95%;
+    
+    --popover: 0 0% 10%;
+    --popover-foreground: 55 20% 95%;
+    
+    --primary: 0 0% 0%; /* Black */
+    --primary-foreground: 55 100% 70%; /* Matte Light Yellow */
+    
+    --secondary: 55 100% 70%; /* Matte Light Yellow */
+    --secondary-foreground: 0 0% 10%; /* Darker text on matte yellow for better contrast */
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 55 100% 70%; /* Matte Light Yellow for accents */
+    --accent-foreground: 0 0% 10%; /* Darker text on matte yellow accents */
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%; /* Darker border for contrast */
+    --input: 0 0% 15%; /* Dark input background */
+    --ring: 55 100% 70%; /* Matte Light yellow for focus rings */
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 55 20% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 55 20% 95%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 55 20% 95%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 55 100% 70%;
+    --secondary: 55 100% 70%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 55 100% 70%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 55 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.invoice-container {
+  @apply max-w-4xl mx-auto bg-card shadow-2xl shadow-secondary/20 rounded-lg overflow-hidden;
+}
+
+.invoice-header {
+  @apply bg-primary text-primary-foreground p-6;
+}
+
+.invoice-body {
+  @apply p-6;
+}
+
+.invoice-footer {
+  @apply p-6 bg-card-foreground/5 border-t border-border;
+}
+
+.invoice-table {
+  @apply w-full border-collapse;
+}
+
+.invoice-table th {
+  @apply bg-muted text-left p-3 font-medium text-muted-foreground;
+}
+
+.invoice-table td {
+  @apply p-3 border-t border-border;
+}
+
+.invoice-table tr:hover {
+  @apply bg-muted/50;
+}
+
+.print-only {
+  @apply hidden;
+}
+
+.thermal-print-container {
+  width: 72mm; 
+  padding: 5mm;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10pt;
+  color: black; 
+  background-color: white;
+}
+
+.thermal-print-container h1 {
+  font-size: 14pt;
+  text-align: center;
+  margin-bottom: 3mm;
+}
+.thermal-print-container h2 {
+  font-size: 12pt;
+  text-align: center;
+  margin-bottom: 2mm;
+}
+.thermal-print-container p {
+  margin-bottom: 1mm;
+}
+.thermal-print-container .item-line {
+  display: flex;
+  justify-content: space-between;
+}
+.thermal-print-container .totals {
+  margin-top: 3mm;
+  border-top: 1px dashed black;
+  padding-top: 2mm;
+}
+.thermal-print-container .footer-text {
+  text-align: center;
+  margin-top: 3mm;
+  font-size: 8pt;
+}
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  .invoice-print-container, 
+  .invoice-print-container *,
+  .thermal-print-container,
+  .thermal-print-container * {
+    visibility: visible;
+  }
+  
+  .invoice-print-container, .thermal-print-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .invoice-print-container {
+    background-color: white !important;
+    color: black !important;
+  }
+  .invoice-print-container * {
+    background-color: transparent !important;
+    color: black !important;
+    border-color: black !important;
+    text-shadow: none !important;
+  }
+   .invoice-print-container .print-bw-text {
+    color: black !important;
+  }
+  .invoice-print-container .print-bw-bg {
+    background-color: black !important;
+    color: white !important;
+  }
+   .invoice-print-container .print-bw-border {
+    border-color: black !important;
+  }
+
+
+  .thermal-print-container {
+    width: 72mm !important;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    color: black !important;
+    background-color: white !important;
+  }
+   .thermal-print-container * {
+    color: black !important;
+    border-color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 20mm;
+  }
+
+  @page thermal {
+    size: 72mm auto;
+    margin: 0;
+  }
+
+  .invoice-print-container {
+    page: unset;
+  }
+
+  .thermal-print-container {
+    page: thermal;
+  }
+}
+
+.glassmorphism {
+  @apply bg-card/80 backdrop-blur-lg border border-border shadow-xl shadow-secondary/10;
+}
+
+.neumorphism {
+  @apply bg-background shadow-[5px_5px_10px_#0a0a0a,-5px_-5px_10px_#1a1a1a];
+}
+.neumorphism-accent {
+   @apply bg-secondary text-secondary-foreground shadow-[inset_5px_5px_10px_#c8c800,inset_-5px_-5px_10px_#ffff33];
+}
+
+
+.input-animated {
+  @apply bg-input text-foreground transition-all duration-300 border-b-2 border-border focus:border-secondary outline-none placeholder:text-muted-foreground;
+}
+
+.button-animated {
+  @apply transition-all duration-300 transform hover:scale-105 active:scale-95;
+}
+
+.text-matte-yellow {
+  color: hsl(var(--secondary));
+}
+.text-shadow-matte-yellow {
+  text-shadow: 0 0 3px hsl(var(--secondary), .5), 0 0 5px hsl(var(--secondary), .3);
+}
+
+
+.bg-black-gradient {
+  @apply bg-gradient-to-br from-black via-gray-900 to-black;
+}
