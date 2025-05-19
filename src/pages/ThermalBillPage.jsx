@@ -63,11 +63,11 @@ const ThermalBillPage = () => {
       resetForm("bill"); 
       setInvoiceData(prev => ({
         ...prev,
-        company: { name: "My Store", address: "123 Main St", phone: "555-1234" },
+        company: { name: "IDS", address: "Valencia Town", phone: "+923704441788" },
         client: { name: "Customer" },
         notes: "Thank you for your purchase!",
         terms: "",
-        currency: "USD",
+        currency: "PKR",
         taxRate: 0, 
         number: `BILL-${Date.now().toString().slice(-6)}`
       }));
