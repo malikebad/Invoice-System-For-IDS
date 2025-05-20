@@ -183,7 +183,7 @@ const InvoicePreview = React.forwardRef(({
       </div>
 
       <div className="invoice-footer p-6 bg-primary text-center text-sm text-secondary rounded-b-lg">
-        <p>Thank you for choosing InvoiceZap!</p>
+        <p>Thank you for choosing IDS-Invoice!</p>
       </div>
     </div>
   );
